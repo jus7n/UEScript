@@ -1,0 +1,3 @@
+[submodule "uescript/vendor/luajit"]
+	path = uescript/vendor/luajit
+	url = https://github.com/LuaJIT/LuaJIT
