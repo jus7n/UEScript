@@ -53,14 +53,13 @@ namespace sdk::util
         return 1;
     }
 
-    template <typename C, auto Field>
+    template <class T, auto Field>
     constexpr int WrapField(lua_State* L)
     {
-        auto inst = reinterpret_cast<void*>(luaL_checkinteger(L, -1));
+        const auto mem_fn = std::mem_fn(Field);
+        const auto inst = reinterpret_cast<T*>(luaL_checkinteger(L, -1));
         UAssert(inst);
-        auto& instance = **static_cast<C**>(inst);
-        auto C::* ptr = Field;
-        auto value = instance.*ptr;
+        const auto value = mem_fn(inst);
         // ReSharper disable once CppCStyleCast
         lua_pushinteger(L, (lua_Integer)value);
         return 1;
