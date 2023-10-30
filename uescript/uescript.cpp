@@ -187,8 +187,8 @@ std::wstring_view UEScript::GetProcessName()
 void UEScript::AssertionFailure(const char* message, const std::source_location& location)
 {
     const std::string& formatted_msg = std::format(
-        "Condition: {}\nFunction: {}\nFile: {}:{}", message, location.file_name(), location.function_name(),
-        location.file_name());
+        "Condition: {}\nFunction: {}\nFile: {}:{}", message, location.function_name(), location.file_name(),
+        location.line());
 #ifdef _DEBUG
     __debugbreak();
 #endif

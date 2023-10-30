@@ -109,9 +109,20 @@ UObject* UE::StaticFindObject(const std::string_view& path)
 
 TArray UE::GetAllActorsOfClass(UObject* world_context, UObject* klass)
 {
+#ifdef SCRIPT_SAFETY_ON
+    __try
+    {
+#endif
     TArray result = {};
     g_EP.GetAllActorsOfClass(world_context, klass, &result);
     return result;
+#ifdef SCRIPT_SAFETY_ON
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return {};
+    }
+#endif
 }
 
 void UE::FreeMemory(void* memory)

@@ -15,9 +15,9 @@
 template <typename T>
 struct BasicTArray
 {
-    T* Data;
-    int32_t Count;
-    int32_t Max;
+    T* Data{ nullptr };
+    int32_t Count{ 0 };
+    int32_t Max{ 0 };
 };
 
 using TArray = BasicTArray<void*>;
